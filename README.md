@@ -77,7 +77,7 @@ Settings can be configured in `config.py` or overridden via environment variable
 ### Start Server with Live Stream:
 ```bash
 # Set your phone IP stream URL
-set RC_STREAM_URL=http://192.168.1.105:8080/video
+set RC_STREAM_URL=http://192.168.20.182:8080/video
 
 # Start server
 python -m server.main
