@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RC Car Co-Pilot Dashboard</title>
+    <!-- Chart.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <span class="pulse-dot" id="statusDot"></span>
+            <h1>RC CO-PILOT <span>OBSTACLE AVOIDANCE</span></h1>
+        </div>
+        <div class="telemetry-bar">
+            <div class="metric"><span class="label">STATUS:</span> <span id="connStatus" class="value yellow">CONNECTING</span></div>
+            <div class="metric"><span class="label">STREAM FPS:</span> <span id="fpsVal" class="value">0.0</span></div>
+            <div class="metric"><span class="label">DETECTOR:</span> <span id="detectorVal" class="value">CLASSICAL</span></div>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Left Panel: Live Camera Feed -->
+        <div class="card feed-card">
+            <div class="card-title">LIVE PERCEPTION FEED</div>
+            <div class="video-container">
+                <img id="videoFeed" src="" alt="Waiting for video stream..." />
+                <div id="noStreamOverlay" class="no-stream">
+                    <span>CONNECTING TO STREAM...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Recommendation & Controls -->
+        <div class="right-column">
+            <!-- Giant Direction Indicator -->
+            <div class="card indicator-card">
+                <div class="card-title">RECOMMENDED ACTION</div>
+                <div id="directionBox" class="direction-box state-forward">
+                    <div id="directionIcon" class="direction-icon">↑</div>
+                    <div id="directionLabel" class="direction-label">FORWARD</div>
+                </div>
+            </div>
+
+            <!-- Regional Clearance Bars -->
+            <div class="card metrics-card">
+                <div class="card-title">REGION OBSTACLE DENSITY</div>
+                <div class="bars-container">
+                    <div class="bar-group">
+                        <div class="bar-label"><span>LEFT</span><span id="scoreLeft">0%</span></div>
+                        <div class="bar-track"><div id="barLeft" class="bar-fill" style="width: 0%;"></div></div>
+                    </div>
+                    <div class="bar-group">
+                        <div class="bar-label"><span>CENTER</span><span id="scoreCenter">0%</span></div>
+                        <div class="bar-track"><div id="barCenter" class="bar-fill" style="width: 0%;"></div></div>
+                    </div>
+                    <div class="bar-group">
+                        <div class="bar-label"><span>RIGHT</span><span id="scoreRight">0%</span></div>
+                        <div class="bar-track"><div id="barRight" class="bar-fill" style="width: 0%;"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Path Plot Chart -->
+            <div class="card path-card">
+                <div class="card-title">ESTIMATED PATH (DEAD RECKONING)</div>
+                <div class="chart-container">
+                    <canvas id="pathChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

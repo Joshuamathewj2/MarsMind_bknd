@@ -1,0 +1,275 @@
+:root {
+    --bg-dark: #0a0e14;
+    --card-bg: #121820;
+    --card-border: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --color-green: #22c55e;
+    --color-amber: #f59e0b;
+    --color-red: #ef4444;
+    --color-blue: #3b82f6;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    padding: 15px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header & Telemetry Bar */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo h1 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.logo h1 span {
+    color: var(--color-blue);
+    font-weight: 400;
+}
+
+.pulse-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--color-amber);
+    display: inline-block;
+    box-shadow: 0 0 8px var(--color-amber);
+}
+
+.pulse-dot.active {
+    background-color: var(--color-green);
+    box-shadow: 0 0 10px var(--color-green);
+}
+
+.pulse-dot.error {
+    background-color: var(--color-red);
+    box-shadow: 0 0 10px var(--color-red);
+}
+
+.telemetry-bar {
+    display: flex;
+    gap: 20px;
+}
+
+.metric {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.metric .value {
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.metric .value.yellow { color: var(--color-amber); }
+.metric .value.green { color: var(--color-green); }
+.metric .value.red { color: var(--color-red); }
+
+/* Dashboard Main Layout Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 15px;
+    flex: 1;
+    min-height: 0;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+/* Feed Container */
+.feed-card {
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.video-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.video-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.no-stream {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10, 14, 20, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--text-muted);
+}
+
+/* GIANT DIRECTION INDICATOR (Glanceable UI) */
+.indicator-card {
+    flex: 1.2;
+    min-height: 160px;
+}
+
+.direction-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    transition: all 0.2s ease-in-out;
+    padding: 10px;
+}
+
+.direction-icon {
+    font-size: 5rem;
+    line-height: 1;
+    font-weight: 900;
+}
+
+.direction-label {
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-top: 5px;
+}
+
+/* Indicator Theme States */
+.state-forward {
+    background: rgba(34, 197, 94, 0.15);
+    border: 3px solid var(--color-green);
+    color: var(--color-green);
+    box-shadow: 0 0 25px rgba(34, 197, 94, 0.3);
+}
+
+.state-left, .state-right {
+    background: rgba(245, 158, 11, 0.15);
+    border: 3px solid var(--color-amber);
+    color: var(--color-amber);
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.3);
+}
+
+.state-stop {
+    background: rgba(239, 68, 68, 0.25);
+    border: 4px solid var(--color-red);
+    color: var(--color-red);
+    box-shadow: 0 0 35px rgba(239, 68, 68, 0.5);
+    animation: pulse-stop 0.8s infinite alternate;
+}
+
+@keyframes pulse-stop {
+    from { transform: scale(0.99); opacity: 0.9; }
+    to { transform: scale(1.02); opacity: 1.0; }
+}
+
+/* Clearance Region Bars */
+.metrics-card {
+    flex: 0.8;
+}
+
+.bars-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    flex: 1;
+}
+
+.bar-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.bar-track {
+    height: 12px;
+    background: #1e293b;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--color-green);
+    transition: width 0.15s ease-out, background-color 0.2s ease;
+}
+
+/* Path Chart Card */
+.path-card {
+    flex: 1.3;
+    min-height: 160px;
+}
+
+.chart-container {
+    position: relative;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+}
